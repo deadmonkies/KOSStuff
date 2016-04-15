@@ -17,8 +17,8 @@
     parameter leanAmount.		// How many degrees to leanAmount
     parameter holdLeanTime.		// How long to hold the specified lean (seconds)
     parameter switchOrbit.		// How parallel the srfprograde and prograde
-                                //   need to be before switching to prograde
-                                //   should be close to 1000 for most cases
+								//   need to be before switching to prograde
+								//   should be close to 1000 for most cases
     set mode to 0.
     set ascention to 90.
     lock steering to heading(compass, ascention).
