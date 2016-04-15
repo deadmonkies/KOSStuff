@@ -33,24 +33,24 @@
         set start to time:seconds.
         set mode to 1.
       }
-		
+
       if (mode = 1) and (time:seconds - start >= holdLeanTime)  {
         // time to stop leaning
         lock steering to srfprograde.
         set mode to 2.
       }
-		
+
       if (mode = 2) and ((vdot(srfprograde:forevector, prograde:forevector) * SWITCH_ORBIT_SCALER) >= switchOrbit) {
         // time to point orbital prograde
         lock steering to prograde.
       }
-	  
+
       if (alt:radar > 70000) {
         // enable antenna
         lights on.
         set done to 1.
       }
-		
+
       if (ship:apoapsis >= targetAlt) {
         //we're high enough, stop!
         set throttle to 0.
