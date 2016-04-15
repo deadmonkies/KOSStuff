@@ -13,5 +13,5 @@
   run ascent.ks.
   run ascent_finder.ks.
   
-  ascent_finder["seek"]().
+  ascent_finder["find_ascent"]().
 }
