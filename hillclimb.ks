@@ -12,6 +12,7 @@
   ).
   
   function seek {
+    // takes given data and finds the best step to take up the hill
     parameter data, fitness_fn, step_size is DEFAULT_STEP_SIZE.
     local next_data is best_neighbor(data, fitness_fn, step_size).
     until fitness_fn(next_data) < fitness_fn(data) {
