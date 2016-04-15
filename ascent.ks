@@ -3,6 +3,7 @@
 // Version 0.0.1
 
 {
+  local SWITCH_ORBIT_SCALER is 1000.
 
   global ascent is lex(
     "version", "0.0.1",
@@ -12,7 +13,6 @@
   function ascent {
     parameter targetAlt.			// Target altitude we should ascend to
 	parameter compass.			// Heading
-	parameter targetInclination.	// Target inclination
 	parameter holdUpTime.		// How long to hold straight up (seconds)
 	parameter leanAmount.		// How many degrees to leanAmount
 	parameter holdLeanTime.		// How long to hold the specified lean (seconds)
@@ -30,7 +30,6 @@
 	  if (mode = 0) and (time:seconds - start >= holdUpTime)  {
 		// time to start leaning
 		set ascention to 90-leanAmount.
-		lock steering to heading(compass, ascention).
 		set start to time:seconds.
 		set mode to 1.
 	  }
@@ -41,12 +40,13 @@
 		set mode to 2.
 	  }
 		
-	  if ((mode = 2) and (vdot(srfprograde:forevector, prograde:forevector) >= (switchOrbit/1000))) {
+	  if (mode = 2) and ((vdot(srfprograde:forevector, prograde:forevector) * SWITCH_ORBIT_SCALER) >= switchOrbit) {
 		// time to point orbital prograde
 		lock steering to prograde.
 	  }
 	  
 	  if (alt:radar > 70000) {
+	    // enable antenna
 	    lights on.
 	    set done to 1.
 	  }
